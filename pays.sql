@@ -1,23 +1,27 @@
-DROP DATABASE IF EXISTS sql_store;
-CREATE DATABASE sql_store; 
-USE sql_store;
+DROP DATABASE IF EXISTS `sql_pays`;
+CREATE DATABASE `sql_pays`; 
+USE `sql_pays`;
 
-CREATE TABLE countries (
-  namess varchar(50) NOT NULL,
-  location varchar(50) DEFAULT NULL,
-  capital_city varchar(50) NOT NULL,
-  currency varchar(50) DEFAULT NULL,
-  population int(11) NOT NULL,
-  area int(11) DEFAULT NULL,
-  population_density int(11) DEFAULT NULL,
-  GDP int(11) DEFAULT NULL,
-  life_expectancy decimal(11,2) DEFAULT NULL,
-  birth_rate decimal(11,2) DEFAULT NULL,
-  death_rate decimal(11,2) DEFAULT NULL,
-  PRIMARY KEY (namess)
-) 
+SET NAMES utf8 ;
+SET character_set_client = utf8mb4 ;
 
-INSERT INTO countries (namess ,location,capital_city,currency, population, area, population_density, GDP, life_expectancy, birth_rate, death_rate) VALUES 
+CREATE TABLE `countries` (
+  `country_id` INT NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `location` varchar(50) DEFAULT NULL,
+  `capital_city` varchar(50) NOT NULL,
+  `currency` varchar(50) DEFAULT NULL,
+  `population` int(11) NOT NULL,
+  `area` int(11) DEFAULT NULL,
+  `population_density` int(11) DEFAULT NULL,
+  `GDP` int(11) DEFAULT NULL,
+  `life_expectancy` decimal(11,2) DEFAULT NULL,
+  `birth_rate` decimal(11,2) DEFAULT NULL,
+  `death_rate` decimal(11,2) DEFAULT NULL,
+  PRIMARY KEY (`country_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+INSERT INTO `countries` (name ,location,capital_city,currency, population, area, population_density, GDP, life_expectancy, birth_rate, death_rate) VALUES 
 ('Abkhazia', 'Asia', 'Sukhumi', 'Georgian lari;', 216000, 8600, 25, NULL, NULL, NULL, NULL),
 ('Afghanistan', 'Asia', 'Kabul', 'Afghan afghani', 29863010, 652090, 46, 7168, 42.9, 46.6, 20.75),
 ('Albania', 'Europe', 'Tirana', 'Albanian lek', 3129678, 28748, 109, 8379, 77.24, 15.11, 5.12),
