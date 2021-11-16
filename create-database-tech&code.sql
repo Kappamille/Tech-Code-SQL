@@ -27,7 +27,7 @@ CREATE TABLE `customers` (
   `points` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`customer_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-INSERT INTO `customers` VALUES (1,'	Émilie','Carrière', '1993-1-14', '02.13.28.05.86', '93', 'avenue du Marechal Juin', '75018' , 'paris', 16);
+INSERT INTO `customers` VALUES (1,'Émilie','Carrière', '1993-1-14', '02.13.28.05.86', '93', 'avenue du Marechal Juin', '75018' , 'paris', 16);
 INSERT INTO `customers` VALUES (2, 'Gaetan', 'Lemelin','1996-1-10', '03.33.21.22.14','46', 'boulevard Albin Durand', '75005', 'paris', 1553);
 INSERT INTO `customers` VALUES (3,'Fayme', 'Marceau', '1976-3-15', '07.82.06.66.11', '60', 'rue Marie de Médicis','62400', 'béthune', 142);
 INSERT INTO `customers` VALUES (4, 'Royden', 'Vadnais', '1989-6-24', '01.56.87.84.73', '83', 'avenue Jules Ferry', '75013', 'paris', 267);
@@ -80,10 +80,8 @@ CREATE TABLE `orders` (
   `comments` varchar(2000) DEFAULT NULL,
   `shipped_date` date DEFAULT NULL,
   PRIMARY KEY (`order_id`),
-  KEY `fk_orders_customers_idx` (`customer_id`),
-  KEY `fk_orders_order_statuses_idx` (`status`),
-  CONSTRAINT `fk_orders_customers` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`customer_id`) ON UPDATE CASCADE,
-  CONSTRAINT `fk_orders_order_statuses` FOREIGN KEY (`status`) REFERENCES `order_statuses` (`order_status_id`) ON UPDATE CASCADE
+  FOREIGN KEY (`customer_id`) REFERENCES `customers` (`customer_id`) ON UPDATE CASCADE, 
+  FOREIGN KEY (`status`) REFERENCES `order_statuses` (`order_status_id`) ON UPDATE CASCADE 
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
@@ -109,9 +107,8 @@ CREATE TABLE `order_items` (
   `product_id` int(11) NOT NULL,
   `quantity` int(11) NOT NULL,
   PRIMARY KEY (`order_id`,`product_id`),
-  KEY `fk_order_items_products_idx` (`product_id`),
-  CONSTRAINT `fk_order_items_orders` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`) ON UPDATE CASCADE,
-  CONSTRAINT `fk_order_items_products` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`) ON UPDATE CASCADE
+  FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`) ON UPDATE CASCADE,
+  FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`) ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 INSERT INTO `order_items` VALUES (1,4,4);
 INSERT INTO `order_items` VALUES (2,4,4);
